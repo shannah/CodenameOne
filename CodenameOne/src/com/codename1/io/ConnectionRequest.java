@@ -25,6 +25,8 @@
 package com.codename1.io;
 
 import com.codename1.impl.CodenameOneImplementation;
+import com.codename1.l10n.ParseException;
+import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
@@ -45,6 +47,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -698,21 +701,16 @@ public class ConnectionRequest implements IOProgressListener {
             if(isCookiesEnabled()) {
                 String[] cookies = impl.getHeaderFields("Set-Cookie", connection);
                 if(cookies != null && cookies.length > 0){
-                    Vector cook = new Vector();
+                    ArrayList cook = new ArrayList();
                     int clen = cookies.length;
                     for(int iter = 0 ; iter < clen ; iter++) {
                         Cookie coo = parseCookieHeader(cookies[iter]);
                         if(coo != null) {
-                            cook.addElement(coo);
+                            cook.add(coo);
                             cookieReceived(coo);
                         }
                     }
-                    Cookie [] arr = new Cookie[cook.size()];
-                    int arlen = arr.length;
-                    for (int i = 0; i < arlen; i++) {
-                        arr[i] = (Cookie) cook.elementAt(i);
-                    }
-                    impl.addCookie(arr);
+                    impl.addCookie((Cookie[])cook.toArray(new Cookie[cook.size()]));
                 }
             }
             
@@ -1016,14 +1014,25 @@ public class ConnectionRequest implements IOProgressListener {
         // separately.. but this is a patch job to just get secure
         // path, and httponly working... don't want to break any existing
         // code for now.
-        Vector parts = StringUtil.tokenizeString(lowerH, ';');
+        java.util.List parts = StringUtil.tokenize(lowerH, ';');
         for ( int i=0; i<parts.size(); i++){
-            String part = (String) parts.elementAt(i);
+            String part = (String) parts.get(i);
             part = part.trim();
             if ( part.indexOf("secure") == 0 ){
                 c.setSecure(true);
             } else if ( part.indexOf("httponly") == 0 ){
                 c.setHttpOnly(true);
+            } else if ( part.indexOf("expires") == 0) {
+                SimpleDateFormat format = new SimpleDateFormat("EEE, dd-MMM-yyyy HH:mm:ss z");
+                String date = part.substring(part.indexOf("=")+1);
+                try {
+                    java.util.Date dt = format.parse(date);
+                    c.setExpires(dt.getTime());
+                } catch (ParseException ex) {
+                    Log.p("Failed to parse expiration date of cookie "+lowerH);
+                    Log.p("Parsing date "+date);
+                    Log.e(ex);
+                }
             }
         }
         
