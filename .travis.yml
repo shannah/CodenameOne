@@ -16,6 +16,10 @@ before_script:
 install:
   - gem install travis
 script:
+ - cd ..
+ - mkdir triggers
+ - cd triggers
+ - bash ../cn1/.travis/trigger-builds.sh
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
  - unzip master.zip -d ../
  - mv ../cn1-binaries-master ../cn1-binaries
@@ -42,8 +46,3 @@ script:
  - rm master.zip
  - cd ../cn1-unit-tests
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -skipCompileCn1Sources
-after_success:
- - cd ..
- - mkdir triggers
- - cd triggers
- - bash ../cn1/.travis/trigger-builds.sh
