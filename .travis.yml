@@ -38,4 +38,4 @@ script:
  - cd ../cn1-unit-tests
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -skipCompileCn1Sources
 after_success:
- - node ../cn1/.travis/trigger-build.js
+ - node ../cn1/.travis/trigger-builds.js
