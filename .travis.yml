@@ -19,7 +19,7 @@ script:
  - cd ..
  - mkdir triggers
  - cd triggers
- - bash ../cn1/.travis/trigger-builds.sh
+ - bash ../CodenameOne/.travis/trigger-builds.sh
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
  - unzip master.zip -d ../
  - mv ../cn1-binaries-master ../cn1-binaries
