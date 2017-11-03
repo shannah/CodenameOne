@@ -14,7 +14,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:
-  - npm install travis-ci
+  - gem install travis
 script:
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
  - unzip master.zip -d ../
@@ -43,4 +43,7 @@ script:
  - cd ../cn1-unit-tests
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -skipCompileCn1Sources
 after_success:
- - node ../cn1/.travis/trigger-builds.js
+ - cd ..
+ - mkdir triggers
+ - cd triggers
+ - bash ../cn1/.travis/trigger-builds.sh
