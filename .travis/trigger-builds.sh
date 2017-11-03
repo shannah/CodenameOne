@@ -8,8 +8,8 @@ if [[ -z "${CN1_TRIGGER_REPOS}" ]]; then
   exit 0
 fi
 travis login --github-token=$GH_TOKEN --org
-travis token
-travis whoami
+#travis token
+#travis whoami
 mkdir repos
 cd repos
 for i in $(echo ${CN1_TRIGGER_REPOS} | tr " " "\n")
