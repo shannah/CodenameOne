@@ -19,7 +19,8 @@ var Travis = require('travis-ci');
 
   	// available through Travis CI
   	// see: http://kamranicus.com/blog/2015/02/26/continuous-deployment-with-travis-ci/
-  	github_token: process.env.GH_TOKEN
+  	username: process.env.GITHUB_USERNAME,
+    password: process.env.GITHUB_PASSWORD
 
   }, function (err, res) {
   	if (err) {
