@@ -7,7 +7,6 @@ if [[ -z "${CN1_TRIGGER_REPOS}" ]]; then
   echo "No CN1_TRIGGER_REPOS environment variable found.  Skipping triggered builds"
   exit 0
 fi
-travis login --github-token=$GH_TOKEN
 mkdir repos
 cd repos
 for i in $(echo ${CN1_TRIGGER_REPOS} | tr " " "\n")
