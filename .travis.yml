@@ -1,8 +1,8 @@
 # Build script for Codename One
 # To trigger building other repos you need to set the GH_TOKEN and CN1_TRIGGER_REPOS
 # environment variables:
-# - GH_TOKEN : Your github personal access token. https://kamranicus.com/posts/2015-02-26-continuous-deployment-with-travis-ci
-# - CN1_TRIGGER_REPOS : A space-delimited list of repos.  E.g. shannah/repo1 shannah/repo2
+# - GH_TOKEN : Your github personal access token. Must include user and public_repo scopes
+# - CN1_TRIGGER_REPOS : A space-delimited list of repos.  E.g. shannah/cn1-unit-tests-android shannah/cn1-unit-tests-ios
 language: java
 
 # Set JDK needed for JavaTestApplication
