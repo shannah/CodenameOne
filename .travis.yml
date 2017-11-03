@@ -19,7 +19,7 @@ script:
  - cd ..
  - mkdir triggers
  - cd triggers
- - travis login --github-token=$GH_TOKEN
+ - travis login --github-token=$GH_TOKEN --org
  - bash ../CodenameOne/.travis/trigger-builds.sh
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
  - unzip master.zip -d ../
