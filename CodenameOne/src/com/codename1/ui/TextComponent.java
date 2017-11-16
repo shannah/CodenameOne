@@ -50,6 +50,14 @@ import java.util.ArrayList;
  * <li>{@code textComponentFieldUIID} sets the UIID of the text field to something other than {@code TextField} 
  *      which is useful for platforms such as iOS where the look of the text field is different within the text component
  * </ol>
+ * <p>
+ * The following code demonstrates a simple set of inputs and validation as it appears in iOS, Android and with 
+ * validation errors
+ * </p>
+ * <script src="https://gist.github.com/codenameone/5a28c7944aeab7d8ae6b26dc81690238.js"></script>
+ * <img src="https://www.codenameone.com/img/blog/pixel-perfect-text-field-picker-ios.png" alt="Running on iOS" />
+ * <img src="https://www.codenameone.com/img/blog/pixel-perfect-text-field-picker-android.png" alt="Running on Android" />
+ * <img src="https://www.codenameone.com/img/blog/pixel-perfect-text-field-error-handling-blank.png" alt="Android validation errors" />
  *
  * @author Shai Almog
  */
@@ -241,6 +249,19 @@ public class TextComponent extends InputComponent {
      */
     public TextComponent label(String text) {
         super.label(text);
+        return this;
+    }
+
+    /**
+     * Convenience method for setting the label and hint together
+     * 
+     * @param text the text and hint
+     * @return this for chaining calls E.g. {@code TextComponent tc = new TextComponent().text("Text").label("Label");
+ }
+     */
+    public TextComponent labelAndHint(String text) {
+        super.label(text);
+        hint(text);
         return this;
     }
 
