@@ -84,11 +84,11 @@ elif [[ -n ${CN1_RUNTESTS_ANDROID_EMULATOR} ]]; then
   adb shell input keyevent 82 &
 
   echo "Running tests with appium in the emulator "
-  ant test-android
+  ant test-android \
+    -Dcn1user=${CN1USER} \
+    -Dcn1password=${CN1PASS} \
 elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
   echo "Running tests on IOS SIMULATOR"
-
-  $CN1 install-appium-tests || true
   echo "Installing appium..."
   npm install appium
   ./node_modules/.bin/appium &
@@ -99,7 +99,9 @@ elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
     kill $APPIUM_PID
   }
   trap stop_appium EXIT
-  ant test-ios
+  ant test-ios \
+    -Dcn1user=${CN1USER} \
+    -Dcn1password=${CN1PASS} \
 fi
 
 exit 0
