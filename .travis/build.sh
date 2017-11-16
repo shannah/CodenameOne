@@ -86,7 +86,8 @@ elif [[ -n ${CN1_RUNTESTS_ANDROID_EMULATOR} ]]; then
   echo "Running tests with appium in the emulator "
   ant test-android \
     -Dcn1user=${CN1USER} \
-    -Dcn1password=${CN1PASS} \
+    -Dcn1password=${CN1PASS}
+    
 elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
   echo "Running tests on IOS SIMULATOR"
   echo "Installing appium..."
