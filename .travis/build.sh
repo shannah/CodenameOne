@@ -87,7 +87,7 @@ elif [[ -n ${CN1_RUNTESTS_ANDROID_EMULATOR} ]]; then
   ant test-android \
     -Dcn1user=${CN1USER} \
     -Dcn1password=${CN1PASS}
-    
+
 elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
   echo "Running tests on IOS SIMULATOR"
   echo "Installing appium..."
@@ -102,7 +102,7 @@ elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
   trap stop_appium EXIT
   ant test-ios \
     -Dcn1user=${CN1USER} \
-    -Dcn1password=${CN1PASS} \
+    -Dcn1password=${CN1PASS}
 fi
 
 exit 0

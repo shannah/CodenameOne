@@ -6,8 +6,6 @@ matrix:
       before_script:
         - "export DISPLAY=:99.0"
         - "sh -e /etc/init.d/xvfb start"
-      install:
-        - gem install travis
 
 ##<CN1:android-15>##
     - language: android
