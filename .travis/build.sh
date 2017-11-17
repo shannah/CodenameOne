@@ -89,6 +89,7 @@ elif [[ -n ${CN1_RUNTESTS_ANDROID_EMULATOR} ]]; then
 elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
   echo "Running tests on IOS SIMULATOR"
   echo "Installing appium..."
+  mkdir ./node_modules || true
   npm install appium
   ./node_modules/.bin/appium &
   APPIUM_PID=$!
