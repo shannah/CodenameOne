@@ -112,6 +112,12 @@
       <exec executable="node_modules/.bin/appium" dir="tests" failonerror="true"/>
     </target>
 
+
+    <target name="update-tests" description="Update tests appium.xml file">
+      <echo>Updating appium.xml to the latest...</echo>
+      <get src="https://raw.githubusercontent.com/shannah/cn1-travis-template/master/appium.xml" dest="tests/core/appium.xml" overwrite="true"/>
+    </target>
+
     <target name="test-ios" depends="ios,install-cli" description="Run Unit Tests on iOS">
       <echo>Codename One iOS Unit Tests</echo>
       <echo>IMPORTANT: This target will compile the Codename One sources, build the unit tests located in the &quot;tests&quot; directory, send the build to the Codename One build server, then run the resulting build on the iOS Simulator on the local machine.</echo>
