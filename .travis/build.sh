@@ -84,9 +84,7 @@ elif [[ -n ${CN1_RUNTESTS_ANDROID_EMULATOR} ]]; then
   adb shell input keyevent 82 &
 
   echo "Running tests with appium in the emulator "
-  ant test-android \
-    -Dcn1user=${CN1USER} \
-    -Dcn1password=${CN1PASS}
+  ant test-android
 
 elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
   echo "Running tests on IOS SIMULATOR"
@@ -100,9 +98,7 @@ elif [[ -n ${CN1_RUNTESTS_IOS_SIMULATOR} ]]; then
     kill $APPIUM_PID
   }
   trap stop_appium EXIT
-  ant test-ios \
-    -Dcn1user=${CN1USER} \
-    -Dcn1password=${CN1PASS}
+  ant test-ios
 fi
 
 exit 0

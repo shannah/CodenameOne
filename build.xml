@@ -2,6 +2,7 @@
 <project name="CodenameOne" default="default" basedir=".">
     <available file="../cn1-binaries" property="cn1.binaries" value="true"/>
     <available file="../codenameone-skins" property="codenameone.skins" value="true"/>
+    <property name="cn1.cli" value="node_modules/.bin/cn1"/>
 
     <target name="get-cn1-binaries" unless="cn1.binaries">
       <get src="https://github.com/codenameone/cn1-binaries/archive/master.zip" dest="master.zip"/>
@@ -26,6 +27,8 @@
 
     <target name="ios" depends="core" description="Build iOS Port">
       <ant dir="Ports/iOSPort" target="jar" inheritAll="false" useNativeBasedir="true"/>
+      <ant dir="vm/JavaAPI" target="jar" inheritAll="false" useNativeBasedir="true"/>
+      <ant dir="vm/ByteCodeTranslator" target="jar" inheritAll="false" useNativeBasedir="true"/>
     </target>
 
     <target name="android" depends="core" description="Build Android Port">
@@ -51,7 +54,7 @@
     </target>
 
     <target name="test-javase" depends="javase,install-cli" description="Run Unit Tests on Simulator">
-      <exec executable="node_modules/.bin/cn1" dir="tests" failonerror="true">
+      <exec executable="${cn1.cli}" dir="tests" failonerror="true">
         <arg value="test"/>
         <arg value="-cn1Sources"/>
         <arg value=".." />
@@ -62,7 +65,7 @@
     </target>
 
     <target name="test-android" depends="android,install-cli" description="Run Unit Tests on Android">
-      <exec executable="node_modules/.bin/cn1" dir="tests" failonerror="true">
+      <exec executable="${cn1.cli}" dir="tests" failonerror="true">
         <arg value="test"/>
         <arg value="-cn1Sources"/>
         <arg value=".." />
@@ -78,7 +81,7 @@
     </target>
 
     <target name="test-ios" depends="ios,install-cli" description="Run Unit Tests on iOS">
-      <exec executable="node_modules/.bin/cn1" dir="tests" failonerror="true">
+      <exec executable="${cn1.cli}" dir="tests" failonerror="true">
         <arg value="test"/>
         <arg value="-cn1Sources"/>
         <arg value=".." />
@@ -90,6 +93,7 @@
         <arg value="ios"/>
         <arg value="-d"/>
         <arg value="${deviceName}"/>
+        <arg value="-Ddebug=1"/>
       </exec>
     </target>
 
